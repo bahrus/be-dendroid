@@ -12,7 +12,7 @@
     "url": "git+https://github.com/bahrus/be-dendroid.git"
   },
   "dependencies": {
-    "be-decorated": "0.0.195",
+    "be-decorated": "0.0.196",
     "be-hive": "0.0.77"
   },
   "devDependencies": {

@@ -5,11 +5,11 @@ export interface EndUserProps {
     buttonsTempl?: HTMLTemplateElement | string,
     hydratingTransform?: Matches
 }
-export interface VirtualProps extends EndUserProps, MinimalProxy{
+export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLDetailsElement>{
 
 }
 
-export type Proxy = HTMLTemplateElement & VirtualProps;
+export type Proxy = HTMLDetailsElement & VirtualProps;
 
 export interface ProxyProps extends VirtualProps{
     proxy: Proxy;
