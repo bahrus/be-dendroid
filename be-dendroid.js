@@ -26,6 +26,10 @@ export class BeDendroid extends EventTarget {
         self.querySelectorAll('details').forEach(details => details.open = true);
         self.open = true;
     }
+    collapseAll({ self }, e) {
+        self.open = false;
+        self.querySelectorAll('details').forEach(details => details.open = false);
+    }
 }
 const tagName = 'be-dendroid';
 const ifWantsToBe = 'dendroid';
@@ -39,7 +43,8 @@ define({
             virtualProps: ['buttonsTempl', 'hydratingTransform'],
             proxyPropDefaults: {
                 hydratingTransform: {
-                    expandAllP: [, 'expandAll']
+                    expandAllP: [, 'expandAll'],
+                    collapseAllP: [, 'collapseAll']
                 }
             }
         },

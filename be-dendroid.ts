@@ -33,7 +33,10 @@ export class BeDendroid extends EventTarget implements Actions{
         self.open = true;
     }
 
-    
+    collapseAll({self}: PP, e: Event){
+        self.open = false;
+        self.querySelectorAll('details').forEach(details => details.open = false);
+    }
 
 }
 
@@ -50,7 +53,8 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
             virtualProps: ['buttonsTempl', 'hydratingTransform'],
             proxyPropDefaults: {
                 hydratingTransform: {
-                    expandAllP: [,'expandAll']
+                    expandAllP: [,'expandAll'],
+                    collapseAllP: [,'collapseAll']
                 }
             }
         },
