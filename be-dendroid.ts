@@ -1,9 +1,11 @@
 import {define, BeDecoratedProps} from 'be-decorated/DE.js';
-import {Actions, PP, VirtualProps, Proxy} from './types';
+import {Actions, PP, VirtualProps, Proxy, ProxyProps} from './types';
 import { register } from 'be-hive/register.js';
 
 export class BeDendroid extends EventTarget implements Actions{
-
+    hydrate(pp: PP): void {
+        
+    }
 }
 
 const tagName = 'be-dendroid';
@@ -16,7 +18,15 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
         propDefaults:{
             ifWantsToBe,
             upgrade,
-            virtualProps: []
+            virtualProps: ['buttonsTempl', 'hydratingTransform'],
+            proxyPropDefaults: {
+                hydratingTransform: {
+
+                }
+            }
+        },
+        actions: {
+            hydrate: 'hydratingTransform'
         }
     },
     complexPropDefaults:{
