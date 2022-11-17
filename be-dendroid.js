@@ -9,6 +9,7 @@ export class BeDendroid extends EventTarget {
             templ = defaultTempl;
         }
         const { DTR } = await import('trans-render/lib/DTR.js');
+        import('xtal-side-nav/xtal-side-nav.js');
         const ctx = {
             host: pp,
             hostController: this,

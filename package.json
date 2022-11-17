@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "be-decorated": "0.0.196",
-    "be-hive": "0.0.77"
+    "be-hive": "0.0.77",
+    "xtal-side-nav": "0.0.100"
   },
   "devDependencies": {
     "may-it-serve": "0.0.4"
