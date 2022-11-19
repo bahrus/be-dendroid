@@ -1,9 +1,12 @@
 import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
-import {Matches} from 'trans-render/lib/types';
+import {CEArgs} from 'trans-render/froop/types';
 
 export interface EndUserProps {
-    buttonsTempl?: HTMLTemplateElement | string,
-    hydratingTransform?: Matches
+    //buttonsTempl?: HTMLTemplateElement | string,
+    //hydratingTransform?: Matches,
+    menuMarkup?: string,
+    menuTag?: string,
+    menuBDConfig?: CEArgs<any, any>,
 }
 export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLDetailsElement>{
 
@@ -18,5 +21,6 @@ export interface ProxyProps extends VirtualProps{
 export type PP = ProxyProps;
 
 export interface Actions{
-    hydrate(pp: PP): void;
+    defineMenu(pp: PP): void;
 }
+
