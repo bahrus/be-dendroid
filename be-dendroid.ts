@@ -3,21 +3,31 @@ import {Actions, PP, VirtualProps, Proxy, ProxyProps} from './types';
 import { register } from 'be-hive/register.js';
 
 
+let defined = false;
 export class BeDendroid extends EventTarget implements Actions{
     async defineMenu(pp: PP) {
-        const {self, menuMarkup} = pp;
+        const {self} = pp;
         const selfSummary = self.querySelector('summary')!;
-        const fragment = (new DOMParser() as any).parseFromString(menuMarkup, 'text/html', {
-            includeShadowRoots: true
-        });
-        selfSummary.appendChild(fragment.body.firstChild);
-        const {isOrWillBe} = await import('be-decorated/isOrWillBe.js');
-        self.querySelectorAll('details').forEach(details => {
-            if(!isOrWillBe(details, 'dendroid')){
-                details.setAttribute('be-dendroid', '');
-            }
-            
-        });
+        if(!defined){
+            const {menuMarkup} = pp;
+       
+            const fragment = (new DOMParser() as any).parseFromString(menuMarkup, 'text/html', {
+                includeShadowRoots: true
+            });
+            selfSummary.appendChild(fragment.body.firstChild);
+            const {isOrWillBe} = await import('be-decorated/isOrWillBe.js');
+            import('be-definitive/be-definitive.js');
+            self.querySelectorAll('details').forEach(details => {
+                if(!isOrWillBe(details, 'dendroid')){
+                    details.setAttribute('be-dendroid', '');
+                }
+            });
+            defined = true;
+        }else{
+            const instance = document.createElement('be-dendroid-menu');
+            selfSummary.appendChild(instance);
+        }
+
     }
 
     expandAll({self}: PP, e: Event){
@@ -42,10 +52,10 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
         propDefaults:{
             ifWantsToBe,
             upgrade,
-            virtualProps: ['menuMarkup', 'menuBDConfig', 'menuTag'],
+            virtualProps: ['menuMarkup', 'menuBDConfig'],
             proxyPropDefaults: {
                 menuMarkup: String.raw `
-<be-denroid-menu t-a-i-l-b-b-d>
+<be-dendroid-menu t-a-i-l-b-b-d be-definitive>
     <template shadowroot=open>
         <xtal-side-nav>
             <button part=expand-all style="width:20px;padding:0px;display:inline-flex;" aria-label="Expand all" title="Expand all">
@@ -61,7 +71,7 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
         </xtal-side-nav>
     </template>
     <!---->
-</be-denroid-menu>
+</be-dendroid-menu>
                 `,
                 menuBDConfig: {
                     config:{
@@ -71,10 +81,7 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
             }
         },
         actions: {
-            defineMenu: {
-                ifAllOf: ['menuMarkup'],
-                ifNoneOf: ['menuTag']
-            }
+            defineMenu: 'menuMarkup'
         }
     },
     complexPropDefaults:{
