@@ -30,5 +30,6 @@ export interface Actions{
     sortDesc(pp: PP): void;
     sortAsc(pp: PP): void;
     cloneNode(pp: PP): void;
+    deleteNode(pp: PP): void;
 }
 
