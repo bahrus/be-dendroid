@@ -2,7 +2,7 @@ import { define } from 'be-decorated/DE.js';
 import { register } from 'be-hive/register.js';
 let defined = false;
 export class BeDendroid extends EventTarget {
-    async defineMenu(pp) {
+    async defineMenu(pp, returnObjMold) {
         const { self } = pp;
         const selfSummary = self.querySelector('summary');
         let instance;
@@ -28,14 +28,19 @@ export class BeDendroid extends EventTarget {
             instance = document.createElement('be-dendroid-menu');
             selfSummary.appendChild(instance);
         }
-        return [{ resolved: true }, {
-                expandAll: { on: 'click', of: instance, composedPathMatches: '.expand-all' },
-                collapseAll: { on: 'click', of: instance, composedPathMatches: '.collapse-all' },
-                sortDesc: { on: 'click', of: instance, composedPathMatches: '.sort-desc' },
-                sortAsc: { on: 'click', of: instance, composedPathMatches: '.sort-asc' },
-                cloneNode: { on: 'click', of: instance, composedPathMatches: '.clone-node' },
-                deleteNode: { on: 'click', of: instance, composedPathMatches: '.delete-node' }
-            }];
+        const eventRoutes = Object.values(returnObjMold[1]);
+        for (const route of eventRoutes) {
+            route.of = instance;
+        }
+        return returnObjMold;
+        // return [{resolved: true}, {
+        //     expandAll: {on:'click', of: instance, composedPathMatches: '.expand-all' },
+        //     collapseAll: {on: 'click', of: instance, composedPathMatches: '.collapse-all'},
+        //     sortDesc: {on: 'click', of: instance, composedPathMatches: '.sort-desc'},
+        //     sortAsc: {on: 'click', of: instance, composedPathMatches: '.sort-asc'},
+        //     cloneNode: {on: 'click', of: instance, composedPathMatches: '.clone-node'},
+        //     deleteNode: {on: 'click', of: instance, composedPathMatches: '.delete-node'}
+        // }] as PPE;
     }
     expandAll({ self }, e) {
         self.querySelectorAll('details').forEach(details => details.open = true);
@@ -340,7 +345,17 @@ define({
             }
         },
         actions: {
-            defineMenu: 'menuMarkup'
+            defineMenu: {
+                ifAllOf: ['menuMarkup'],
+                returnObjMold: [{ resolved: true }, {
+                        expandAll: { on: 'click', of: 'tbd', composedPathMatches: '.expand-all' },
+                        collapseAll: { on: 'click', of: 'tbd', composedPathMatches: '.collapse-all' },
+                        sortDesc: { on: 'click', of: 'tbd', composedPathMatches: '.sort-desc' },
+                        sortAsc: { on: 'click', of: 'tbd', composedPathMatches: '.sort-asc' },
+                        cloneNode: { on: 'click', of: 'tbd', composedPathMatches: '.clone-node' },
+                        deleteNode: { on: 'click', of: 'tbd', composedPathMatches: '.delete-node' }
+                    }]
+            }
         }
     },
     complexPropDefaults: {
