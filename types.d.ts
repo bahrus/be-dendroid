@@ -29,5 +29,6 @@ export interface Actions{
     collapseAll(pp: PP, e: MouseEvent): void;
     sortDesc(pp: PP): void;
     sortAsc(pp: PP): void;
+    cloneNode(pp: PP): void;
 }
 
