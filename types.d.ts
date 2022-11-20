@@ -1,4 +1,4 @@
-import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
+import {BeDecoratedProps, MinimalProxy, EventConfigs} from 'be-decorated/types';
 import {CEArgs} from 'trans-render/froop/types';
 
 export interface EndUserProps {
@@ -19,7 +19,15 @@ export interface ProxyProps extends VirtualProps{
 
 export type PP = ProxyProps;
 
+export type PA = Partial<PP>;
+
+export type PPE = [PA | undefined, EventConfigs<PP, Actions>]
+
 export interface Actions{
-    defineMenu(pp: PP): void;
+    defineMenu(pp: PP): Promise<PPE>;
+    expandAll(pp: PP, e: MouseEvent): void;
+    collapseAll(pp: PP, e: MouseEvent): void;
+    sortDesc(pp: PP): void;
+    sortAsc(pp: PP): void;
 }
 
