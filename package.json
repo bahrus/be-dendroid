@@ -12,12 +12,12 @@
     "url": "git+https://github.com/bahrus/be-dendroid.git"
   },
   "dependencies": {
-    "be-decorated": "0.0.197",
-    "be-definitive": "0.0.74",
-    "be-open-and-shut": "0.0.7",
+    "be-decorated": "0.0.198",
+    "be-definitive": "0.0.75",
+    "be-open-and-shut": "0.0.8",
     "be-hive": "0.0.77",
-    "xtal-side-nav": "0.0.100",
-    "xtal-element": "0.0.539"
+    "xtal-side-nav": "0.0.101",
+    "xtal-element": "0.0.540"
   },
   "devDependencies": {
     "may-it-serve": "0.0.4"

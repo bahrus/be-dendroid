@@ -24,7 +24,7 @@ export type PA = Partial<PP>;
 export type PPE = [PA | undefined, EventConfigs<PP, Actions>]
 
 export interface Actions{
-    defineMenu(pp: PP): Promise<PPE>;
+    defineMenu(pp: PP, returnObjMold: PPE): Promise<PPE>;
     expandAll(pp: PP, e: MouseEvent): void;
     collapseAll(pp: PP, e: MouseEvent): void;
     sortDesc(pp: PP): void;
