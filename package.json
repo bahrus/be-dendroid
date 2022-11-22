@@ -14,7 +14,7 @@
   "dependencies": {
     "be-decorated": "0.0.198",
     "be-definitive": "0.0.75",
-    "be-open-and-shut": "0.0.8",
+    "be-open-and-shut": "0.0.9",
     "be-hive": "0.0.77",
     "xtal-side-nav": "0.0.101",
     "xtal-element": "0.0.540"
