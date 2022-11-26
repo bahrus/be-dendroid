@@ -33,14 +33,6 @@ export class BeDendroid extends EventTarget {
             route.of = instance;
         }
         return returnObjMold;
-        // return [{resolved: true}, {
-        //     expandAll: {on:'click', of: instance, composedPathMatches: '.expand-all' },
-        //     collapseAll: {on: 'click', of: instance, composedPathMatches: '.collapse-all'},
-        //     sortDesc: {on: 'click', of: instance, composedPathMatches: '.sort-desc'},
-        //     sortAsc: {on: 'click', of: instance, composedPathMatches: '.sort-asc'},
-        //     cloneNode: {on: 'click', of: instance, composedPathMatches: '.clone-node'},
-        //     deleteNode: {on: 'click', of: instance, composedPathMatches: '.delete-node'}
-        // }] as PPE;
     }
     expandAll({ self }, e) {
         self.querySelectorAll('details').forEach(details => details.open = true);
@@ -114,7 +106,7 @@ define({
             virtualProps: ['menuMarkup', 'menuBDConfig'],
             proxyPropDefaults: {
                 menuMarkup: String.raw `
-<be-dendroid-menu t-a-i-l-b-b-d be-definitive>
+<be-dendroid-menu t-a-i-l-b be-definitive>
     <template shadowroot=open>
         <xtal-side-nav be-open-and-shut>
 
@@ -330,7 +322,6 @@ define({
                 height: 30px;
             }
         </style>
-        <be-hive></be-hive>
     </template>
     <!---->
 </be-dendroid-menu>
