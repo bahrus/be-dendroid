@@ -312,6 +312,16 @@ define({
 
             xtal-side-nav::part(opener){
                 font-size:8pt;
+                background-color: transparent;
+                background-repeat: no-repeat;
+                border: none;
+                cursor: pointer;
+                overflow: hidden;
+                /*outline: none;*/
+                margin: 0;
+                padding: 0;
+                position: relative;
+                
             }
             xtal-side-nav::part(side-nav){
                 position:absolute;
@@ -321,7 +331,9 @@ define({
                 display:block;
                 height: 30px;
             }
+
         </style>
+        <be-hive></be-hive>
     </template>
     <!---->
 </be-dendroid-menu>
