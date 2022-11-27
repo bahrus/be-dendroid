@@ -5,7 +5,8 @@ export interface EndUserProps {
     //buttonsTempl?: HTMLTemplateElement | string,
     //hydratingTransform?: Matches,
     menuMarkup?: string,
-    menuBDConfig?: CEArgs<any, any>,
+    //menuBDConfig?: CEArgs<any, any>,
+    searchNodeSelector?: string,
 }
 export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLDetailsElement>{
 

@@ -111,9 +111,9 @@ export class BeDendroid extends EventTarget implements Actions{
         if (searchString === undefined || searchString === null || searchString === '')
             return;
         this.collapseAll(pp, e);
-        const {self} = pp;
+        const {self, searchNodeSelector} = pp;
         const newValLC = searchString.toLowerCase();
-        const tNodes = Array.from(self.querySelectorAll('div, summary')); //TODO:  make this configurable
+        const tNodes = Array.from(self.querySelectorAll(searchNodeSelector!)); 
         tNodes.forEach((el: any) => {
             if (el.textContent!.toLowerCase().indexOf(newValLC) > -1) {
                 el.classList.add('match');
@@ -143,8 +143,9 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
         propDefaults:{
             ifWantsToBe,
             upgrade,
-            virtualProps: ['menuMarkup', 'menuBDConfig'],
+            virtualProps: ['menuMarkup', 'searchNodeSelector'],
             proxyPropDefaults: {
+                searchNodeSelector: 'div, summary',
                 menuMarkup: String.raw `
 <be-dendroid-menu t-a-i-l-b be-definitive>
     <template shadowroot=open>
@@ -358,7 +359,6 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
                 border: none;
                 cursor: pointer;
                 overflow: hidden;
-                /*outline: none;*/
                 margin: 0;
                 padding: 0;
                 position: relative;
@@ -379,15 +379,6 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
     <!---->
 </be-dendroid-menu>
                 `,
-                menuBDConfig: {
-                    config:{
-                        propDefaults:{
-                            styles: {
-
-                            }
-                        }
-                    }
-                }
             }
         },
         actions: {
