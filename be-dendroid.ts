@@ -43,7 +43,7 @@ export class BeDendroid extends EventTarget implements Actions{
         self.open = true;
     }
 
-    collapseAll({self}: PP, e: Event){
+    collapseAll({self}: PP, e?: Event){
         self.open = false;
         self.querySelectorAll('details').forEach(details => details.open = false);
     }
@@ -103,6 +103,33 @@ export class BeDendroid extends EventTarget implements Actions{
     deleteNode(pp: PP): void {
         const {self} = pp;
         self.remove();
+    }
+
+    searchNode(pp: PP, e: InputEvent, search: HTMLInputElement){
+        
+        const searchString = search.value;
+        if (searchString === undefined || searchString === null || searchString === '')
+            return;
+        this.collapseAll(pp, e);
+        const {self} = pp;
+        const newValLC = searchString.toLowerCase();
+        const tNodes = Array.from(self.querySelectorAll('div, summary')); //TODO:  make this configurable
+        tNodes.forEach((el: any) => {
+            if (el.textContent!.toLowerCase().indexOf(newValLC) > -1) {
+                el.classList.add('match');
+            }
+            else {
+                el.classList.remove('match');
+            }
+        });
+        Array.from(self.querySelectorAll('details:has(.match)')).forEach((detailsEl: any) =>{
+            detailsEl.open = true;
+        });
+        const firstMatch = self.querySelector('.match');
+        if(firstMatch !== null){
+            self.open = true;
+            firstMatch.scrollIntoView();
+        }
     }
 }
 
@@ -313,6 +340,7 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
                 </svg>
                 <span>Delete this section</span>
             </button>
+            <input part=search placeholder="Search" type=search>
         </xtal-side-nav>
         <style adopt>
             xtal-side-nav {
@@ -371,7 +399,8 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
                     sortDesc: {on: 'click', of: 'tbd', composedPathMatches: '.sort-desc'},
                     sortAsc: {on: 'click', of: 'tbd', composedPathMatches: '.sort-asc'},
                     cloneNode: {on: 'click', of: 'tbd', composedPathMatches: '.clone-node'},
-                    deleteNode: {on: 'click', of: 'tbd', composedPathMatches: '.delete-node'}
+                    deleteNode: {on: 'click', of: 'tbd', composedPathMatches: '.delete-node'},
+                    searchNode: {on: 'input', of: 'tbd', composedPathMatches: 'input[type="search"]'}
                 }]
             }
         }

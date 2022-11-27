@@ -31,5 +31,6 @@ export interface Actions{
     sortAsc(pp: PP): void;
     cloneNode(pp: PP): void;
     deleteNode(pp: PP): void;
+    searchNode(pp: PP, e: InputEvent, search: HTMLInputElement): void;
 }
 

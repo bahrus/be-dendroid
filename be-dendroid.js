@@ -93,6 +93,31 @@ export class BeDendroid extends EventTarget {
         const { self } = pp;
         self.remove();
     }
+    searchNode(pp, e, search) {
+        const searchString = search.value;
+        if (searchString === undefined || searchString === null || searchString === '')
+            return;
+        this.collapseAll(pp, e);
+        const { self } = pp;
+        const newValLC = searchString.toLowerCase();
+        const tNodes = Array.from(self.querySelectorAll('div, summary')); //TODO:  make this configurable
+        tNodes.forEach((el) => {
+            if (el.textContent.toLowerCase().indexOf(newValLC) > -1) {
+                el.classList.add('match');
+            }
+            else {
+                el.classList.remove('match');
+            }
+        });
+        Array.from(self.querySelectorAll('details:has(.match)')).forEach((detailsEl) => {
+            detailsEl.open = true;
+        });
+        const firstMatch = self.querySelector('.match');
+        if (firstMatch !== null) {
+            self.open = true;
+            firstMatch.scrollIntoView();
+        }
+    }
 }
 const tagName = 'be-dendroid';
 const ifWantsToBe = 'dendroid';
@@ -300,6 +325,7 @@ define({
                 </svg>
                 <span>Delete this section</span>
             </button>
+            <input part=search placeholder="Search" type=search>
         </xtal-side-nav>
         <style adopt>
             xtal-side-nav {
@@ -356,7 +382,8 @@ define({
                         sortDesc: { on: 'click', of: 'tbd', composedPathMatches: '.sort-desc' },
                         sortAsc: { on: 'click', of: 'tbd', composedPathMatches: '.sort-asc' },
                         cloneNode: { on: 'click', of: 'tbd', composedPathMatches: '.clone-node' },
-                        deleteNode: { on: 'click', of: 'tbd', composedPathMatches: '.delete-node' }
+                        deleteNode: { on: 'click', of: 'tbd', composedPathMatches: '.delete-node' },
+                        searchNode: { on: 'input', of: 'tbd', composedPathMatches: 'input[type="search"]' }
                     }]
             }
         }
