@@ -1,8 +1,27 @@
 {
   "name": "be-dendroid",
   "version": "0.0.2",
-  "description": "",
-  "main": "index.js",
+  "description": "Add usesful tree functionality to a deeply nested chain of details/summary HTML nodes. ",
+  "main": "be-dendroid.js",
+  "module": "be-dendroid.js",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements",
+    "search",
+    "details",
+    "summary",
+    "tree",
+    "clone"
+  ],
+  "exports": {
+    ".": "./be-dendroid.js",
+    "./be-dendroid.js": "./be-dendroid.js"
+  },  "files": [
+    "*.*"
+  ],
+  "types": "types.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node node_modules/may-it-serve/serve.js"
@@ -21,9 +40,10 @@
     "xtal-element": "0.0.545"
   },
   "devDependencies": {
-    "may-it-serve": "0.0.4"
+    "may-it-serve": "0.0.4",
+    "@skypack/package-check": "0.2.2"
   },
-  "author": "",
+  "author": "@bahrus@mastodon.social",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bahrus/be-dendroid/issues"

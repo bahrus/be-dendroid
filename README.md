@@ -1,5 +1,6 @@
 # be-dendroid
 
+Add usesful tree functionality to a deeply nested chain of details/summary HTML nodes. 
 
 
 <!--
