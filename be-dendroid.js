@@ -108,7 +108,7 @@ define({
                 menuMarkup: String.raw `
 <be-dendroid-menu t-a-i-l-b be-definitive>
     <template shadowroot=open>
-        <xtal-side-nav be-open-and-shut>
+        <xtal-side-nav exportparts="opener, side-nav" be-open-and-shut>
 
             <button part=expand-all class=expand-all aria-label="Expand all">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#CD138F" class="bi bi-arrows-expand" viewBox="0 0 16 16">
