@@ -1,5 +1,6 @@
 import {BeDecoratedProps, MinimalProxy, EventConfigs} from 'be-decorated/types';
 import {CEArgs} from 'trans-render/froop/types';
+import {EndUserProps as BeSearchingEndUserProps} from 'be-searching/types';
 
 export interface EndUserProps {
     //buttonsTempl?: HTMLTemplateElement | string,
@@ -7,6 +8,7 @@ export interface EndUserProps {
     menuMarkup?: string,
     //menuBDConfig?: CEArgs<any, any>,
     searchNodeSelector?: string,
+    beSearchingProps?: BeSearchingEndUserProps;
 }
 export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLDetailsElement>{
 
@@ -33,5 +35,6 @@ export interface Actions{
     cloneNode(pp: PP): void;
     deleteNode(pp: PP): void;
     searchNode(pp: PP, e: InputEvent, search: HTMLInputElement): void;
+    attachBeSearchingProps(pp: PP): void;
 }
 

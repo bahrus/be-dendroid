@@ -98,7 +98,7 @@ export class BeDendroid extends EventTarget {
         if (searchString === undefined || searchString === null || searchString === '')
             return;
         this.collapseAll(pp, e);
-        const { self, searchNodeSelector } = pp;
+        const { self, searchNodeSelector, beSearchingProps } = pp;
         const newValLC = searchString.toLowerCase();
         const tNodes = Array.from(self.querySelectorAll(searchNodeSelector));
         tNodes.forEach((el) => {
@@ -117,6 +117,15 @@ export class BeDendroid extends EventTarget {
             self.open = true;
             firstMatch.scrollIntoView();
         }
+        if (beSearchingProps !== undefined) {
+            self.beDecorated.searching.forText = searchString;
+        }
+    }
+    attachBeSearchingProps(pp) {
+        import('be-searching/be-searching.js');
+        const { self, beSearchingProps } = pp;
+        self.beDecorated.searching = beSearchingProps;
+        self.setAttribute('be-searching', '');
     }
 }
 const tagName = 'be-dendroid';
@@ -128,8 +137,9 @@ define({
         propDefaults: {
             ifWantsToBe,
             upgrade,
-            virtualProps: ['menuMarkup', 'searchNodeSelector'],
+            virtualProps: ['menuMarkup', 'searchNodeSelector', 'beSearchingProps'],
             proxyPropDefaults: {
+                beSearchingProps: {},
                 searchNodeSelector: 'div, summary',
                 menuMarkup: String.raw `
 <be-dendroid-menu t-a-i-l-b be-definitive>
@@ -378,7 +388,8 @@ define({
                         deleteNode: { on: 'click', of: 'tbd', composedPathMatches: '.delete-node' },
                         searchNode: { on: 'input', of: 'tbd', composedPathMatches: 'input[type="search"]' }
                     }]
-            }
+            },
+            attachBeSearchingProps: 'beSearchingProps',
         }
     },
     complexPropDefaults: {

@@ -111,7 +111,7 @@ export class BeDendroid extends EventTarget implements Actions{
         if (searchString === undefined || searchString === null || searchString === '')
             return;
         this.collapseAll(pp, e);
-        const {self, searchNodeSelector} = pp;
+        const {self, searchNodeSelector, beSearchingProps} = pp;
         const newValLC = searchString.toLowerCase();
         const tNodes = Array.from(self.querySelectorAll(searchNodeSelector!)); 
         tNodes.forEach((el: any) => {
@@ -130,6 +130,16 @@ export class BeDendroid extends EventTarget implements Actions{
             self.open = true;
             firstMatch.scrollIntoView();
         }
+        if(beSearchingProps !== undefined){
+            (<any>self).beDecorated.searching.forText = searchString;
+        }
+    }
+
+    attachBeSearchingProps(pp: PP){
+        import('be-searching/be-searching.js');
+        const {self, beSearchingProps} = pp;
+        (<any>self).beDecorated.searching = beSearchingProps;
+        self.setAttribute('be-searching', ''); 
     }
 }
 
@@ -143,8 +153,10 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
         propDefaults:{
             ifWantsToBe,
             upgrade,
-            virtualProps: ['menuMarkup', 'searchNodeSelector'],
+            virtualProps: ['menuMarkup', 'searchNodeSelector', 'beSearchingProps'],
             proxyPropDefaults: {
+                beSearchingProps: {
+                },
                 searchNodeSelector: 'div, summary',
                 menuMarkup: String.raw `
 <be-dendroid-menu t-a-i-l-b be-definitive>
@@ -393,7 +405,8 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
                     deleteNode: {on: 'click', of: 'tbd', composedPathMatches: '.delete-node'},
                     searchNode: {on: 'input', of: 'tbd', composedPathMatches: 'input[type="search"]'}
                 }]
-            }
+            },
+            attachBeSearchingProps: 'beSearchingProps',
         }
     },
     complexPropDefaults:{
