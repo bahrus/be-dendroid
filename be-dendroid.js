@@ -95,10 +95,14 @@ export class BeDendroid extends EventTarget {
     }
     searchNode(pp, e, search) {
         const searchString = search.value;
-        if (searchString === undefined || searchString === null || searchString === '')
-            return;
-        this.collapseAll(pp, e);
         const { self, searchNodeSelector, beSearchingProps } = pp;
+        if (searchString === undefined || searchString === null || searchString === '') {
+            if (beSearchingProps !== undefined) {
+                self.beDecorated.searching.forText = searchString;
+            }
+            return;
+        }
+        this.collapseAll(pp, e);
         const newValLC = searchString.toLowerCase();
         const tNodes = Array.from(self.querySelectorAll(searchNodeSelector));
         tNodes.forEach((el) => {

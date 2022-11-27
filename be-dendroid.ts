@@ -108,10 +108,16 @@ export class BeDendroid extends EventTarget implements Actions{
     searchNode(pp: PP, e: InputEvent, search: HTMLInputElement){
         
         const searchString = search.value;
-        if (searchString === undefined || searchString === null || searchString === '')
-            return;
-        this.collapseAll(pp, e);
         const {self, searchNodeSelector, beSearchingProps} = pp;
+        if (searchString === undefined || searchString === null || searchString === ''){
+            if(beSearchingProps !== undefined){
+                (<any>self).beDecorated.searching.forText = searchString;
+            }
+            return;
+        }
+            
+        this.collapseAll(pp, e);
+        
         const newValLC = searchString.toLowerCase();
         const tNodes = Array.from(self.querySelectorAll(searchNodeSelector!)); 
         tNodes.forEach((el: any) => {
