@@ -1,6 +1,6 @@
 {
   "name": "be-dendroid",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Add usesful tree functionality to a deeply nested chain of details/summary HTML nodes. ",
   "main": "be-dendroid.js",
   "module": "be-dendroid.js",
@@ -18,7 +18,8 @@
   "exports": {
     ".": "./be-dendroid.js",
     "./be-dendroid.js": "./be-dendroid.js"
-  },  "files": [
+  },
+  "files": [
     "*.*"
   ],
   "types": "types.d.ts",
