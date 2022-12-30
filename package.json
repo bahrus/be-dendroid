@@ -32,17 +32,21 @@
     "url": "git+https://github.com/bahrus/be-dendroid.git"
   },
   "dependencies": {
-    "be-decorated": "0.0.205",
-    "be-definitive": "0.0.80",
+    "be-decorated": "0.0.215",
+    "be-definitive": "0.0.85",
+    "be-having": "0.0.7",
+    "be-importing": "0.0.48",
     "be-open-and-shut": "0.0.10",
     "be-searching": "0.0.11",
-    "be-hive": "0.0.78",
-    "xtal-side-nav": "0.0.101",
-    "xtal-element": "0.0.545"
+    "be-hive": "0.0.79",
+    "trans-render": "0.0.654",
+    "tree-context": "0.0.0",
+    "xtal-side-nav": "0.0.107",
+    "xtal-element": "0.0.548"
   },
   "devDependencies": {
     "may-it-serve": "0.0.4",
-    "@playwright/test": "1.28.1",
+    "@playwright/test": "1.29.1",
     "@skypack/package-check": "0.2.2"
   },
   "author": "@bahrus@mastodon.social",

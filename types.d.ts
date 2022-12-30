@@ -5,12 +5,14 @@ import {EndUserProps as BeSearchingEndUserProps} from 'be-searching/types';
 export interface EndUserProps {
     //buttonsTempl?: HTMLTemplateElement | string,
     //hydratingTransform?: Matches,
-    menuMarkup?: string,
+    //menuMarkup?: string,
     //menuBDConfig?: CEArgs<any, any>,
     searchNodeSelector?: string,
     beSearchingProps?: BeSearchingEndUserProps;
+    treeContextFrom?: string;
 }
 export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLDetailsElement>{
+    //isBranch: boolean;
 
 }
 
@@ -27,7 +29,7 @@ export type PA = Partial<PP>;
 export type PPE = [PA | undefined, EventConfigs<PP, Actions>]
 
 export interface Actions{
-    defineMenu(pp: PP, returnObjMold: PPE): Promise<PPE>;
+    addTreeContext(pp: PP, returnObjMold: PPE): Promise<PPE>;
     expandAll(pp: PP, e: MouseEvent): void;
     collapseAll(pp: PP, e: MouseEvent): void;
     sortDesc(pp: PP): void;
