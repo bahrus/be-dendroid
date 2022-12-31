@@ -3,21 +3,12 @@ import { register } from 'be-hive/register.js';
 export class BeDendroid extends EventTarget {
     //#template: HTMLTemplateElement | undefined;
     async addTreeContext(pp, returnObjMold) {
-        const { self, treeContextFrom } = pp;
-        const selfSummary = self.querySelector('summary'); //TODO: make this configurable
+        const { self, treeContextFrom, summaryElSelector } = pp;
+        const selfSummary = self.querySelector(summaryElSelector); //TODO: make this configurable
         const instance = document.createElement('tree-context');
         instance.setAttribute('be-importing', treeContextFrom);
-        // (<any>instance).beDecorated = {
-        //     importing: {
-        //         from: treeContextFrom
-        //     }
-        // };
         selfSummary.appendChild(instance);
         import('be-importing/be-importing.js');
-        // customElements.whenDefined('be-importing').then(() => {
-        //     const beImporting = document.createElement('be-importing') as any as Attachable;
-        //     beImporting.attach(instance);
-        // });
         const eventRoutes = Object.values(returnObjMold[1]);
         for (const route of eventRoutes) {
             if (typeof route !== 'boolean') {
@@ -137,7 +128,8 @@ define({
             proxyPropDefaults: {
                 beSearchingProps: {},
                 searchNodeSelector: 'div, summary',
-                treeContextFrom: 'tree-context/tree-context.html'
+                treeContextFrom: 'tree-context/tree-context.html',
+                summaryElSelector: '*'
             }
         },
         actions: {

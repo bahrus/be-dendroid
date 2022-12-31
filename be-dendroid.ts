@@ -8,8 +8,8 @@ export class BeDendroid extends EventTarget implements Actions{
     //#template: HTMLTemplateElement | undefined;
 
     async addTreeContext(pp: PP, returnObjMold: PPE) {
-        const {self, treeContextFrom} = pp;
-        const selfSummary = self.querySelector('summary')!; //TODO: make this configurable
+        const {self, treeContextFrom, summaryElSelector} = pp;
+        const selfSummary = self.querySelector(summaryElSelector!)!; //TODO: make this configurable
         const instance = document.createElement('tree-context');
         instance.setAttribute('be-importing', treeContextFrom!)
         selfSummary.appendChild(instance);
@@ -149,10 +149,10 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
             upgrade,
             virtualProps: [/*'menuMarkup',*/ 'searchNodeSelector', 'beSearchingProps', 'treeContextFrom'],
             proxyPropDefaults: {
-                beSearchingProps: {
-                },
+                beSearchingProps: {},
                 searchNodeSelector: 'div, summary',
-                treeContextFrom: 'tree-context/tree-context.html'
+                treeContextFrom: 'tree-context/tree-context.html',
+                summaryElSelector: '*'
             }
         },
         actions: {

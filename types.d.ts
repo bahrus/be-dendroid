@@ -10,6 +10,7 @@ export interface EndUserProps {
     searchNodeSelector?: string,
     beSearchingProps?: BeSearchingEndUserProps;
     treeContextFrom?: string;
+    summaryElSelector?: string,
 }
 export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLDetailsElement>{
     //isBranch: boolean;
