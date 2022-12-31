@@ -18,8 +18,22 @@ export class BeDendroid extends EventTarget {
         return returnObjMold;
     }
     expandAll({ self }, e) {
-        self.querySelectorAll('details').forEach(details => details.open = true);
-        self.open = true;
+        self.querySelectorAll('details').forEach(details => {
+            this.toggleEl(details, true);
+            //details.open = true;
+        });
+        this.toggleEl(self, true);
+    }
+    toggleEl(el, val) {
+        if (el instanceof HTMLDetailsElement) {
+            el.open = val;
+        }
+        else {
+            const bdo = el.beDecorated?.detailOriented;
+            if (bdo !== undefined) {
+                bdo.open = val;
+            }
+        }
     }
     collapseAll({ self }, e) {
         self.open = false;
