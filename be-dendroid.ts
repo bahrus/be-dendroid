@@ -11,18 +11,19 @@ export class BeDendroid extends EventTarget implements Actions{
         const {self, treeContextFrom} = pp;
         const selfSummary = self.querySelector('summary')!; //TODO: make this configurable
         const instance = document.createElement('tree-context');
-        (<any>instance).beDecorated = {
-            importing: {
-                from: treeContextFrom
-            }
-        };
+        instance.setAttribute('be-importing', treeContextFrom)
+        // (<any>instance).beDecorated = {
+        //     importing: {
+        //         from: treeContextFrom
+        //     }
+        // };
         selfSummary.appendChild(instance);
         
         import('be-importing/be-importing.js');
-        customElements.whenDefined('be-importing').then(() => {
-            const beImporting = document.createElement('be-importing') as any as Attachable;
-            beImporting.attach(instance);
-        });
+        // customElements.whenDefined('be-importing').then(() => {
+        //     const beImporting = document.createElement('be-importing') as any as Attachable;
+        //     beImporting.attach(instance);
+        // });
         const eventRoutes = Object.values(returnObjMold[1]);
         for(const route of eventRoutes){
             if(typeof route !== 'boolean'){

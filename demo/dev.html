@@ -8,15 +8,35 @@
 </head>
 <body>
     <style>
-        [is-dendroid]>:not(summary){
+        details>:not(summary){
             margin-left:20px;
             display:flex;
             flex-direction:column;
         }
 
     </style>
+    <script nomodule be-having='{
+        "make":{
+            "details": {
+                "be": "dendroid"
+            }
+        }
+    }'>
+
+        // export const dendroid = {
+        //         impl: ['be-dendroid/be-dendroid.js']
+        //     }
+    </script>
     <!-- https://www.filamentgroup.com/lab/html-includes/ -->
     <iframe style="display:none" src="directory.html" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
+    <!-- <details>
+        <summary>test</summary>
+        i am here
+        <details>
+            <summary>test 2</summary>
+            i am here 2
+        </details>
+    </details> -->
     <script type=importmap>
         {
             "imports": {
@@ -26,8 +46,9 @@
                 "be-based/": "../node_modules/be-based/",
                 "be-decorated/": "../node_modules/be-decorated/",
                 "be-definitive/": "../node_modules/be-definitive/",
+                "be-dendroid/": "../",
                 "be-exportable/": "../node_modules/be-exportable/",
-                "be-having/": "../node_modules/be-having/",
+                "be-having/": "../be-having/",
                 "be-hive/": "../node_modules/be-hive/",
                 "be-importing/": "../node_modules/be-importing/",
                 "be-observant/": "../node_modules/be-observant/",
@@ -42,6 +63,7 @@
     </script>
     <script type=module>
         import '../be-dendroid.js';
+        import 'be-having/be-having.js';
     </script>
 
 </body>
