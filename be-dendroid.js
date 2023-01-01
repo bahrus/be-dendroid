@@ -66,9 +66,9 @@ export class BeDendroid extends EventTarget {
         return this.sort(pp, 'desc');
     }
     sort(pp, sortDir) {
-        const { self } = pp;
+        const { self, contentSelector } = pp;
         //if (sortDir === undefined) return;
-        Array.from(self.querySelectorAll('section')).forEach((section) => {
+        Array.from(self.querySelectorAll(contentSelector)).forEach((section) => {
             const sectionChildren = Array.from(section.children);
             const one = sortDir === 'asc' ? 1 : -1;
             const minusOne = sortDir === 'asc' ? -1 : 1;
@@ -150,12 +150,19 @@ define({
         propDefaults: {
             ifWantsToBe,
             upgrade,
-            virtualProps: [/*'menuMarkup',*/ 'searchNodeSelector', 'beSearchingProps', 'treeContextFrom'],
+            virtualProps: [
+                'searchNodeSelector',
+                'beSearchingProps',
+                'treeContextFrom',
+                'contentSelector',
+                'summaryElSelector'
+            ],
             proxyPropDefaults: {
                 beSearchingProps: {},
                 searchNodeSelector: 'div, summary',
                 treeContextFrom: 'tree-context/tree-context.html',
-                summaryElSelector: '*'
+                summaryElSelector: '*',
+                contentSelector: 'section',
             }
         },
         actions: {
