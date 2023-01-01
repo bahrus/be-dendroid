@@ -35,6 +35,8 @@
   "dependencies": {
     "be-decorated": "0.0.217",
     "be-definitive": "0.0.87",
+    "be-detail-oriented": "0.0.14",
+    "be-open-and-shut": "0.0.11",
     "be-having": "0.0.10",
     "be-importing": "0.0.50",
     "be-searching": "0.0.12",
@@ -47,8 +49,8 @@
   "devDependencies": {
     "may-it-serve": "0.0.4",
     "@playwright/test": "1.29.1",
-    "@skypack/package-check": "0.2.2",
-    "be-detail-oriented": "0.0.11"
+    "@skypack/package-check": "0.2.2"
+    
   },
   "author": "@bahrus@mastodon.social",
   "license": "MIT",

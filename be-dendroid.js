@@ -1,13 +1,23 @@
 import { define } from 'be-decorated/DE.js';
 import { register } from 'be-hive/register.js';
+import { setProp } from 'trans-render/lib/setProp.js';
 export class BeDendroid extends EventTarget {
     //#template: HTMLTemplateElement | undefined;
     async addTreeContext(pp, returnObjMold) {
         const { self, treeContextFrom, summaryElSelector } = pp;
-        const selfSummary = self.querySelector(summaryElSelector); //TODO: make this configurable
-        const instance = document.createElement('tree-context');
-        instance.setAttribute('be-importing', treeContextFrom);
-        selfSummary.appendChild(instance);
+        const selfSummary = self.querySelector(summaryElSelector);
+        let instance = selfSummary.querySelector('tree-context');
+        let alreadyExisted = true;
+        if (instance === null) {
+            instance = document.createElement('tree-context');
+            alreadyExisted = false;
+        }
+        if (customElements.get('tree-context') === undefined) {
+            instance.setAttribute('be-importing', treeContextFrom);
+        }
+        if (!alreadyExisted) {
+            selfSummary.appendChild(instance);
+        }
         import('be-importing/be-importing.js');
         const eventRoutes = Object.values(returnObjMold[1]);
         for (const route of eventRoutes) {
@@ -18,9 +28,9 @@ export class BeDendroid extends EventTarget {
         return returnObjMold;
     }
     expandAll({ self }, e) {
-        self.querySelectorAll('details').forEach(details => {
-            this.toggleEl(details, true);
-            //details.open = true;
+        const { localName } = self;
+        self.querySelectorAll(localName).forEach(descendant => {
+            this.toggleEl(descendant, true);
         });
         this.toggleEl(self, true);
     }
@@ -29,15 +39,15 @@ export class BeDendroid extends EventTarget {
             el.open = val;
         }
         else {
-            const bdo = el.beDecorated?.detailOriented;
-            if (bdo !== undefined) {
-                bdo.open = val;
-            }
+            setProp(el, 'beDecorated.detailOriented.open', val);
         }
     }
     collapseAll({ self }, e) {
-        self.open = false;
-        self.querySelectorAll('details').forEach(details => details.open = false);
+        const { localName } = self;
+        this.toggleEl(self, false);
+        self.querySelectorAll(localName).forEach(descendant => {
+            this.toggleEl(descendant, false);
+        });
     }
     #getStrVal(el) {
         switch (el.localName) {
