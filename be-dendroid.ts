@@ -66,6 +66,8 @@ export class BeDendroid extends EventTarget implements Actions{
         switch (el.localName) {
             case 'details':
                 return el.querySelector('summary')!.textContent as string;
+            case 'fieldset':
+                return el.querySelector('legend')!.textContent as string;
             default:
                 return el.textContent as string;
         }
