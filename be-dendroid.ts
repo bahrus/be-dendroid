@@ -144,12 +144,15 @@ export class BeDendroid extends EventTarget implements Actions{
                 el.classList.remove('match');
             }
         });
-        Array.from(self.querySelectorAll('details:has(.match)')).forEach((detailsEl: any) =>{
-            detailsEl.open = true;
+        const {localName} = self;
+        Array.from(self.querySelectorAll(`${localName}:has(.match)`)).forEach((detailsEl: any) =>{
+            //detailsEl.open = true;
+            this.toggleEl(detailsEl, true);
         });
         const firstMatch = self.querySelector('.match');
         if(firstMatch !== null){
-            self.open = true;
+            this.toggleEl(self, true);
+            //self.open = true;
             firstMatch.scrollIntoView();
         }
         if(beSearchingProps !== undefined){
@@ -184,7 +187,7 @@ define<Proxy & BeDecoratedProps<VirtualProps, Actions>, Actions>({
             ],
             proxyPropDefaults: {
                 beSearchingProps: {},
-                searchNodeSelector: 'div, summary',
+                searchNodeSelector: 'div, summary, legend',
                 treeContextFrom: 'tree-context/tree-context.html',
                 summaryElSelector: '*',
                 contentSelector: 'section',

@@ -122,12 +122,15 @@ export class BeDendroid extends EventTarget {
                 el.classList.remove('match');
             }
         });
-        Array.from(self.querySelectorAll('details:has(.match)')).forEach((detailsEl) => {
-            detailsEl.open = true;
+        const { localName } = self;
+        Array.from(self.querySelectorAll(`${localName}:has(.match)`)).forEach((detailsEl) => {
+            //detailsEl.open = true;
+            this.toggleEl(detailsEl, true);
         });
         const firstMatch = self.querySelector('.match');
         if (firstMatch !== null) {
-            self.open = true;
+            this.toggleEl(self, true);
+            //self.open = true;
             firstMatch.scrollIntoView();
         }
         if (beSearchingProps !== undefined) {
@@ -159,7 +162,7 @@ define({
             ],
             proxyPropDefaults: {
                 beSearchingProps: {},
-                searchNodeSelector: 'div, summary',
+                searchNodeSelector: 'div, summary, legend',
                 treeContextFrom: 'tree-context/tree-context.html',
                 summaryElSelector: '*',
                 contentSelector: 'section',
